@@ -1,7 +1,7 @@
 [project]
 name = "hello-web"
 version = "0.1.0"
-description = "Add your description here"
+description = "Play with fastapi and react, running on pythonanywhere"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
