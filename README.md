@@ -9,10 +9,14 @@ Steps:
 - follow doc on [uv fastapi](https://docs.astral.sh/uv/guides/integration/fastapi/).
 
 
-Run:
+### First time, to setup project
 ```
 uv init --app
 uv add fastapi --extra standard
+```
+### When cloning this repo
+```
+uv sync
 ```
 
 ## Run in dev mode
