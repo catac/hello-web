@@ -8,6 +8,11 @@ Play with fastapi and react, running on pythonanywhere
   ```
   uv sync
   ```
+- create the `.env` file
+  ```
+  REPO_DIR = "C:\...\hello-web"
+  PA_API_TOKEN = "<the token>"
+  ```
 - follow doc on [uv fastapi](https://docs.astral.sh/uv/guides/integration/fastapi/).
   ```
   uv run fastapi dev
@@ -29,6 +34,7 @@ Play with fastapi and react, running on pythonanywhere
 - create an environment file `.env`:
   ```
   REPO_DIR = "/home/catac/hello-web"
+  PA_API_TOKEN = "<the token>"
   ```
 
 ### Check howto setup pythonanywhere with FastAPI
@@ -50,3 +56,8 @@ Play with fastapi and react, running on pythonanywhere
 
 ### Check how to deploy automatically from GitHub
 - automatically deploy [from github](https://medium.com/@aadibajpai/deploying-to-pythonanywhere-via-github-6f967956e664)
+  except that we don't use Webhooks, as they don't work now. We use Actions to trigger deployment of the app.
+- define variables in the GitHub repo: Settings -> Secrets and variables -> Actions
+  - Secrets: PA_API_TOKEN
+  - Variables: PA_DOMAIN_NAME, PA_USERNAME
+ 
