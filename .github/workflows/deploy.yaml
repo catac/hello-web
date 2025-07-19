@@ -9,8 +9,8 @@ jobs:
   call-webhook:
     runs-on: ubuntu-latest
     steps:
-      - name: Send POST request to FastAPI webhook
+      - name: Update code on PythonAnywhere
         run: |
-          curl --silent --fail-with-body -X POST https://catac.pythonanywhere.com/update_server \
+          curl --silent --fail-with-body -X POST ${{ vars.UPDATE_SERVER_URL }} \
           -H "Content-Type: application/json" \
-          -d '{"update": "true"}'
+          -d '{"update": "${{ secrets.UPDATE }}"}'
