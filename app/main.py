@@ -3,8 +3,11 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+class UpdatePayload(BaseModel):
+    update: bool
+
 @app.post("/update_server")
-async def update_server(payload: BaseModel):
+async def update_server(info: UpdatePayload):
     # Trigger repo update logic here
     # Example: pull latest changes
     # repo = git.Repo('path/to/git_repo')
@@ -12,7 +15,7 @@ async def update_server(payload: BaseModel):
     # origin.pull()
     return {
         "message": "Webhook received", 
-        "payload": payload
+        "payload": info.update
     }
 
 @app.get("/")
