@@ -17,7 +17,7 @@ jobs:
       - name: Reload webapp on PythonAnywhere
         uses: jensvog/pythonanywhere-webapp-reload-action@v1
         with:
-          host: 'eu.pythonanywhere.com'
+          host: 'www.pythonanywhere.com'
           username: '${{ vars.PA_USERNAME }}'
           api-token: '${{ secrets.PA_API_TOKEN }}'
           domain-name: '${{ vars.PA_DOMAIN_NAME }}'
