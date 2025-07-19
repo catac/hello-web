@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Update code on PythonAnywhere
         run: |
-          curl --silent --fail-with-body -X POST ${{ vars.UPDATE_SERVER_URL }} \
+          curl --silent --fail-with-body -X POST https://${{ vars.PA_DOMAIN_NAME }}/update_server \
           -H "Content-Type: application/json" \
-          -d '{"update": "${{ secrets.UPDATE }}"}'
+          -d '{"update": "true"}'
+      - name: Reload webapp on PythonAnywhere
+        uses: jensvog/pythonanywhere-webapp-reload-action@v1
+        with:
+          host: 'eu.pythonanywhere.com'
+          username: {{ vars.PA_USERNAME }}
+          api-token: {{ secrets.PA_API_TOKEN }}
+          domain-name: {{ vars.PA_DOMAIN_NAME }}
