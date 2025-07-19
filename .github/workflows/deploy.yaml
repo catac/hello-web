@@ -18,6 +18,6 @@ jobs:
         uses: jensvog/pythonanywhere-webapp-reload-action@v1
         with:
           host: 'eu.pythonanywhere.com'
-          username: {{ vars.PA_USERNAME }}
-          api-token: {{ secrets.PA_API_TOKEN }}
-          domain-name: {{ vars.PA_DOMAIN_NAME }}
+          username: '${{ vars.PA_USERNAME }}'
+          api-token: '${{ secrets.PA_API_TOKEN }}'
+          domain-name: '${{ vars.PA_DOMAIN_NAME }}'
