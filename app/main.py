@@ -4,7 +4,7 @@ import dotenv
 dotenv.load_dotenv()
 app = FastAPI()
 
-from .updater import update_router
+from app.updater import update_router
 app.include_router(update_router)
 
 @app.get("/")
