@@ -18,5 +18,5 @@ jobs:
       - name: Reload website on PythonAnywhere
         run: |
           curl --silent --fail-with-body -X POST \
-          https://www.pythonanywhere.com/api/v1/user/${{ vars.PA_USERNAME }}/websites/${{ vars.PA_DOMAIN_NAME }}/reload/'
+          https://www.pythonanywhere.com/api/v1/user/${{ vars.PA_USERNAME }}/websites/${{ vars.PA_DOMAIN_NAME }}/reload/
           -H 'Authorization: Token ${{ secrets.PA_API_TOKEN }}'
