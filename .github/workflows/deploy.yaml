@@ -14,10 +14,9 @@ jobs:
           curl --silent --fail-with-body -X POST https://${{ vars.PA_DOMAIN_NAME }}/update_server \
           -H "Content-Type: application/json" \
           -d '{"update": "true"}'
-      - name: Reload webapp on PythonAnywhere
-        uses: jensvog/pythonanywhere-webapp-reload-action@v1
-        with:
-          host: 'www.pythonanywhere.com'
-          username: '${{ vars.PA_USERNAME }}'
-          api-token: '${{ secrets.PA_API_TOKEN }}'
-          domain-name: '${{ vars.PA_DOMAIN_NAME }}'
+    
+      - name: Reload website on PythonAnywhere
+        run: |
+          curl --silent --fail-with-body -X POST \
+          https://www.pythonanywhere.com/api/v1/user/${{ vars.PA_USERNAME }}/websites/${{ vars.PA_DOMAIN_NAME }}/reload/'
+          -H 'Authorization: Token ${{ secrets.PA_API_TOKEN }}'
