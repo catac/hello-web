@@ -11,6 +11,6 @@ jobs:
     steps:
       - name: Send POST request to FastAPI webhook
         run: |
-          curl -X POST https://catac.pythonanywhere.com/update_server \
+          curl --silent --fail-with-body -X POST https://catac.pythonanywhere.com/update_server \
           -H "Content-Type: application/json" \
           -d '{"update": "true"}'
