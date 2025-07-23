@@ -1,9 +1,19 @@
 from twelvedata import TDClient
-from settings import twelvedata_api_key
+from twelvedata.client import DefaultHttpClient
+from settings import twelvedata_api_key, https_proxy
 from typing import Dict
 from datetime import datetime
 
-td = TDClient(apikey=twelvedata_api_key)
+http_client = DefaultHttpClient("https://api.twelvedata.com/")
+if https_proxy:
+    print(f"Using HTTPS proxy: {https_proxy}")
+    http_client.session.proxies = {
+        "http": https_proxy,
+        "https": https_proxy,
+    }
+
+
+td = TDClient(apikey=twelvedata_api_key, http_client=http_client)
 
 prices: Dict[str, float] = {}
 prices_timestamp = datetime.fromtimestamp(0)
