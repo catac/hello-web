@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel
+from settings import repo_dir, pa_api_token
 import git
-import os
 import subprocess
+
 
 update_router = APIRouter()
 
@@ -11,12 +12,12 @@ class UpdatePayload(BaseModel):
     update: bool
 
 
-def get_commit_msg(commit):
+def get_commit_msg(commit: git.Commit) -> str:
     """Helper function to format commit message."""
     return f"{commit.hexsha}: {commit.message.strip()}"
 
 
-def get_process_output(process):
+def get_process_output(process: subprocess.CompletedProcess) -> str:
     """Helper function to get output from a subprocess."""
     return (
         process.stdout.decode("utf-8")
@@ -30,11 +31,9 @@ async def update_server(
     info: UpdatePayload,
     authorization: str = Header(None),  # Optional header for authorization
 ):
-    pa_api_token = os.getenv("PA_API_TOKEN")
-    if not pa_api_token or authorization != "Token " + pa_api_token:
+    if authorization != "Token " + pa_api_token:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
-    repo_dir = os.getenv("REPO_DIR")
     repo = git.Repo(repo_dir)
     origin = repo.remotes.origin
     if info.update:
