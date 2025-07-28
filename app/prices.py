@@ -40,7 +40,7 @@ def update_prices():
         print(f"{datetime.now()}: Updated price for {symbol}: {prices[symbol]}")
 
 
-def last_price(symbol: str) -> PriceInfo:
+def last_price(symbol: str) -> PriceInfo | None:
     """Function to get the price of a stock."""
     global prices_timestamp
     since_update = datetime.now(tz=timezone.utc) - prices_timestamp
@@ -54,4 +54,6 @@ def last_price(symbol: str) -> PriceInfo:
         )
 
     internal_symbol = symbol.replace("_", "/")
+    if internal_symbol not in prices:
+        return None
     return PriceInfo(price=prices[internal_symbol], timestamp=prices_timestamp)
