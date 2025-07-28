@@ -8,8 +8,12 @@ app.include_router(update_router)
 
 @app.get("/last_price/{symbol}")
 async def get_last_price(symbol: str):
-    price = last_price(symbol)
-    return {"symbol": symbol, "price": price}
+    priceInfo = last_price(symbol)
+    return {
+        "symbol": symbol,
+        "price": priceInfo.price,
+        "timestamp": priceInfo.timestamp.strftime("%Y-%m-%d %H:%M:%S %Z"),
+    }
 
 
 @app.get("/")
