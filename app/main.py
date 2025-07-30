@@ -1,9 +1,13 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from updater import update_router
 from prices import last_price
 
 app = FastAPI()
 app.include_router(update_router)
+
+app.mount("/assets", StaticFiles(directory="web/dist/assets"), name="assets")
 
 
 @app.get("/last_price/{symbol}")
@@ -22,5 +26,5 @@ async def get_last_price(symbol: str):
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def read_root():
+    return FileResponse("web/dist/index.html")
