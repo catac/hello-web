@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel
-from settings import repo_dir, pa_api_token
+from .settings import repo_dir, pa_api_token
 import git
 import subprocess
 
